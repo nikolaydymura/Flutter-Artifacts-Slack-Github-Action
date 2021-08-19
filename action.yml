@@ -1,0 +1,56 @@
+name: 'Upload dSYM to Firebase Crashlytics'
+description: 'Upload dSYM file to Firebase Crashlytics'
+inputs:
+  slack-channel:
+    description: 'Destination Slack channel'
+    required: true
+  slack-webhook:
+    description: 'Slack webhook'
+    required: true
+  key-regex:
+    description: 'Regex to find issue key from commit'
+    required: true
+  build_number:
+    description: 'Build number'
+    required: true
+  ios-release-url:
+    description: 'Link to download iOS build'
+    required: true
+  ios-version-name:
+    description: 'Version name for iOS build'
+    required: true
+  android-release-url:
+    description: 'Link to download Android build'
+    required: true
+  android-version-name:
+    description: 'Version name for Android build'
+    required: true
+  jira-host:
+    description: 'Atlassian Jira host'
+    required: true
+runs:
+  using: "composite"
+  steps:
+    - name: Build slack payload
+      id: build_payload
+      run: |
+        ./slack_build_info_payload.sh
+      env:
+        BUILD_NUMBER: ${{ inputs.build_number }}
+        GIT_ACTOR: ${{ github.actor }}
+        REF_NAME: ${{ github.ref }}
+        JIRA_HOST: ${{ inputs.jira-host }}
+        COMMIT_MESSAGE: ${{ github.event.head_commit.message }}
+        ISSUE_KEY_REGEX: ${{ inputs.key-regex }}
+        BUILD_URL: https://github.com/${{github.repository}}/actions/runs/${{github.run_id}}
+        IOS_VERSION_NAME: ${{ inputs.ios-version-name }}
+        IOS_RELEASE_URL: ${{ inputs.ios-release-url }}
+        ANDROID_VERSION_NAME: ${{ inputs.android-version-name }}
+        ANDROID_RELEASE_URL: ${{ inputs.android-release-url }}
+    - name: Send slack notification
+      continue-on-error: true
+      env:
+        SLACK_WEBHOOK: ${{ inputs.slack-webhook }}
+        SLACK_CHANNEL: ${{ inputs.slack-channel }}
+        SLACK_CUSTOM_PAYLOAD: '${{ steps.build_payload.outputs.message_payload }}'
+      uses: Ilshidur/action-slack@2.0.2
