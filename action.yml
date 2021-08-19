@@ -34,7 +34,7 @@ runs:
     - name: Build slack payload
       id: build_payload
       run: |
-        ./slack_build_info_payload.sh
+        ${{ github.action_path }}/slack_build_info_payload.sh ${{ github.action_path }}/slack-build-info-template.json
       env:
         BUILD_NUMBER: ${{ inputs.build_number }}
         GIT_ACTOR: ${{ github.actor }}
