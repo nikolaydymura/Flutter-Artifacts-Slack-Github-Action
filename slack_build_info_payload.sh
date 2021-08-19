@@ -7,7 +7,7 @@ if [[ -z "$ISSUE_KEY" ]]; then
   exit 1
 fi
 
-slack_message_payload=$(sed 's/\s+/ /g'$1 |
+slack_message_payload=$(sed 's/\s+/ /g' $1 |
   sed -e ':a' -e 'N' -e '$!ba' -e 's/\n//g' |
   sed 's,__message_body__,'${REF_NAME}' ('${BUILD_NUMBER}') was successfully built!,g' |
   sed 's,__git_branch__,'${REF_NAME}',g' |
