@@ -4,7 +4,7 @@ inputs:
   key-regex:
     description: 'Regex to find issue key from commit'
     required: true
-  build_number:
+  build-number:
     description: 'Build number'
     required: true
   ios-release-url:
@@ -35,7 +35,7 @@ runs:
         ${{ github.action_path }}/slack_build_info_payload.sh ${{ github.action_path }}/slack-build-info-template.json
       shell: bash
       env:
-        BUILD_NUMBER: ${{ inputs.build_number }}
+        BUILD_NUMBER: ${{ inputs.build-number }}
         GIT_ACTOR: ${{ github.actor }}
         REF_NAME: ${{ github.ref }}
         JIRA_HOST: ${{ inputs.jira-host }}
