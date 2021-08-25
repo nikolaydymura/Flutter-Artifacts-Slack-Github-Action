@@ -1,6 +1,6 @@
 #!/bin/bash
 
-ISSUE_KEY=$(echo "${COMMIT_MESSAGE}" | sed -E 's/'${ISSUE_KEY_REGEX}'/\1/g')
+ISSUE_KEY=$(echo "${COMMIT_MESSAGE}" | sed -E 's:'${ISSUE_KEY_REGEX}':\1:g')
 
 if [[ -z "$ISSUE_KEY" ]]; then
   echo "::error file=$(basename "$0"),line=$LINENO,col=0::Issues key in commit message not found"
