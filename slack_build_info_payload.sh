@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 
+env
+
 ISSUE_KEY=$(echo "${COMMIT_MESSAGE}" | head -n 1 | sed -E 's:'${ISSUE_KEY_REGEX}':\1:g')
 
 echo "::debug::ISSUE_KEY=$ISSUE_KEY"
@@ -18,11 +20,11 @@ slack_message_payload=$(sed 's/\s+/ /g' $1 |
   sed 's,__build_url__,'${BUILD_URL}',g' |
   sed 's,__issue_url__,https://'${JIRA_HOST}'/browse/'${ISSUE_KEY}',g' |
   sed 's,__ios_version__,'${IOS_VERSION_NAME}',g' |
-  sed 's,__ios_release_url__,'${IOS_RELEASE_URL}',g' |
+  sed 's,__ios_release_url__,'"${IOS_RELEASE_URL}"',g' |
   sed 's,__ios_install_url__,'$(echo "${IOS_INSTALL_URL//:\/\//://0.0.0.0}")',g' |
   sed 's,__android_version__,'${ANDROID_VERSION_NAME}',g' |
   sed 's,__android_release_url__,'${ANDROID_RELEASE_URL}',g' |
-  sed 's,__android_install_url__,'${ANDROID_INSTALL_URL}',g')
+  sed 's,__android_install_url__,'"${ANDROID_INSTALL_URL}"',g')
 
 echo "${message_payload}"
 
