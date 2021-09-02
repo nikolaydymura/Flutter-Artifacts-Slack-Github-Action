@@ -1,6 +1,11 @@
 #!/bin/bash
+set -e
+
+echo "::debug::environment $(env)"
 
 ISSUE_KEY=$(echo "${COMMIT_MESSAGE}" | sed -E 's:'${ISSUE_KEY_REGEX}':\1:g')
+
+echo "::debug::ISSUE_KEY=$ISSUE_KEY"
 
 if [[ -z "$ISSUE_KEY" ]]; then
   echo "::error file=$(basename "$0"),line=$LINENO,col=0::Issues key in commit message not found"
