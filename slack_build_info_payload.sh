@@ -17,11 +17,13 @@ slack_message_payload=$(sed 's/\s+/ /g' $1 |
   sed 's/__git_actor__/'${GIT_ACTOR}'/g' |
   sed 's,__build_url__,'${BUILD_URL}',g' |
   sed 's,__issue_url__,https://'${JIRA_HOST}'/browse/'${ISSUE_KEY}',g' |
+  sed 's,__ios_version__,'${IOS_VERSION_NAME}',g' |
   sed 's,__ios_release_url__,'${IOS_RELEASE_URL}',g' |
   sed 's,__ios_install_url__,'$(echo "${IOS_INSTALL_URL//:\/\//://0.0.0.0}")',g' |
-  sed 's,__ios_version__,'${IOS_VERSION_NAME}',g' |
+  sed 's,__android_version__,'${ANDROID_VERSION_NAME}',g' |
   sed 's,__android_release_url__,'${ANDROID_RELEASE_URL}',g' |
-  sed 's,__android_install_url__,'${ANDROID_INSTALL_URL}',g' |
-  sed 's,__android_version__,'${ANDROID_VERSION_NAME}',g')
+  sed 's,__android_install_url__,'${ANDROID_INSTALL_URL}',g')
+
+echo "${message_payload}"
 
 echo "::set-output name=message_payload::${slack_message_payload}"
