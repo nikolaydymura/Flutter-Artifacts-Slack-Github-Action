@@ -1,9 +1,7 @@
 #!/bin/bash
 set -e
 
-echo "::debug::environment $(env)"
-
-ISSUE_KEY=$(echo "${COMMIT_MESSAGE}" | sed -E 's:'${ISSUE_KEY_REGEX}':\1:g')
+ISSUE_KEY=$(echo "${COMMIT_MESSAGE}" | head -n 1 | sed -E 's:'${ISSUE_KEY_REGEX}':\1:g')
 
 echo "::debug::ISSUE_KEY=$ISSUE_KEY"
 
