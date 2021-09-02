@@ -12,20 +12,15 @@
       "type": "divider"
     },
     {
-      "type": "context",
-      "elements": [
+      "type": "section",
+      "fields": [
         {
           "type": "mrkdwn",
-          "text": "Git Branch: *__git_branch__*"
-        }
-      ]
-    },
-    {
-      "type": "context",
-      "elements": [
+          "text": "Github Actor:\n*__git_actor__*"
+        },
         {
           "type": "mrkdwn",
-          "text": "Github Actor: *__git_actor__*"
+          "text": "Git Branch:\n*__git_branch__*"
         }
       ]
     },
@@ -58,16 +53,11 @@
       "elements": [
         {
           "type": "mrkdwn",
-          "text": "iOS Version: __ios_version__"
-        }
-      ]
-    },
-    {
-      "type": "context",
-      "elements": [
+          "text": "<__ios_release_url__|Release iOS __ios_version__>"
+        },
         {
           "type": "mrkdwn",
-          "text": "iOS Release URL: __ios_release_url__"
+          "text": "<__ios_install_url__|Install iOS __ios_version__>"
         }
       ]
     },
@@ -79,16 +69,11 @@
       "elements": [
         {
           "type": "mrkdwn",
-          "text": "Android Version: __android_version__"
-        }
-      ]
-    },
-    {
-      "type": "context",
-      "elements": [
+          "text": "<__android_release_url__|Release Android __android_version__>"
+        },
         {
           "type": "mrkdwn",
-          "text": "Android Release URL: __android_release_url__"
+          "text": "<__android_install_url__|Install Android __android_version__>"
         }
       ]
     }

@@ -10,11 +10,17 @@ inputs:
   ios-release-url:
     description: 'Link to download iOS build'
     required: true
+  ios-install-url:
+    description: 'Link to install iOS build'
+    required: true
   ios-version-name:
     description: 'Version name for iOS build'
     required: true
   android-release-url:
     description: 'Link to download Android build'
+    required: true
+  android-install-url:
+    description: 'Link to install Android build'
     required: true
   android-version-name:
     description: 'Version name for Android build'
@@ -44,5 +50,7 @@ runs:
         BUILD_URL: https://github.com/${{github.repository}}/actions/runs/${{github.run_id}}
         IOS_VERSION_NAME: ${{ inputs.ios-version-name }}
         IOS_RELEASE_URL: ${{ inputs.ios-release-url }}
+        IOS_INSTALL_URL: ${{ inputs.ios-install-url }}
         ANDROID_VERSION_NAME: ${{ inputs.android-version-name }}
         ANDROID_RELEASE_URL: ${{ inputs.android-release-url }}
+        ANDROID_INSTALL_URL: ${{ inputs.android-install-url }}
