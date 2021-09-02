@@ -53,11 +53,29 @@
       "elements": [
         {
           "type": "mrkdwn",
-          "text": "<__ios_release_url__|Release iOS __ios_version__>"
+          "text": "iOS __ios_version__"
+        }
+      ]
+    },
+    {
+      "type": "actions",
+      "elements": [
+        {
+          "type": "button",
+          "text": {
+            "type": "plain_text",
+            "text": "Open __ios_version__"
+          },
+          "style": "primary",
+          "url": "__ios_release_url__"
         },
         {
-          "type": "mrkdwn",
-          "text": "<__ios_install_url__|Install iOS __ios_version__>"
+          "type": "button",
+          "text": {
+            "type": "plain_text",
+            "text": "Install __ios_version__"
+          },
+          "url": "__ios_install_url__"
         }
       ]
     },
@@ -69,11 +87,29 @@
       "elements": [
         {
           "type": "mrkdwn",
-          "text": "<__android_release_url__|Release Android __android_version__>"
+          "text": "Android __android_version__"
+        }
+      ]
+    },
+    {
+      "type": "actions",
+      "elements": [
+        {
+          "type": "button",
+          "text": {
+            "type": "plain_text",
+            "text": "Open __android_version__"
+          },
+          "style": "primary",
+          "url": "__android_release_url__"
         },
         {
-          "type": "mrkdwn",
-          "text": "<__android_install_url__|Install Android __android_version__>"
+          "type": "button",
+          "text": {
+            "type": "plain_text",
+            "text": "Install __android_version__"
+          },
+          "url": "__android_install_url__"
         }
       ]
     }
