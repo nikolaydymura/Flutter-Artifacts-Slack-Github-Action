@@ -1,5 +1,5 @@
-name: 'Upload dSYM to Firebase Crashlytics'
-description: 'Upload dSYM file to Firebase Crashlytics'
+name: 'Build slack message payload for Flutter'
+description: 'Build slack message payload for Flutter'
 inputs:
   key-regex:
     description: 'Regex to find issue key from commit'
@@ -31,26 +31,6 @@ inputs:
 outputs:
   message-payload:
     description: "Slack message payload"
-    value: ${{ steps.build_payload.outputs.message_payload }}
 runs:
-  using: "composite"
-  steps:
-    - name: Build slack payload
-      id: build_payload
-      run: |
-        ${{ github.action_path }}/slack_build_info_payload.sh ${{ github.action_path }}/slack-build-info-template.json
-      shell: bash
-      env:
-        BUILD_NUMBER: ${{ inputs.build-number }}
-        GIT_ACTOR: ${{ github.actor }}
-        REF_NAME: ${{ github.ref }}
-        JIRA_HOST: ${{ inputs.jira-host }}
-        COMMIT_MESSAGE: ${{ github.event.head_commit.message }}
-        ISSUE_KEY_REGEX: ${{ inputs.key-regex }}
-        BUILD_URL: https://github.com/${{github.repository}}/actions/runs/${{github.run_id}}
-        IOS_VERSION_NAME: ${{ inputs.ios-version-name }}
-        IOS_RELEASE_URL: ${{ inputs.ios-release-url }}
-        IOS_INSTALL_URL: ${{ inputs.ios-install-url }}
-        ANDROID_VERSION_NAME: ${{ inputs.android-version-name }}
-        ANDROID_RELEASE_URL: ${{ inputs.android-release-url }}
-        ANDROID_INSTALL_URL: ${{ inputs.android-install-url }}
+  using: 'node12'
+  main: 'index.js'
