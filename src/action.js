@@ -125,6 +125,8 @@ async function action(payload) {
         ]
     };
 
+    console.log(JSON.stringify(messageBody));
+
     core.setOutput("message-payload", JSON.stringify(messageBody));
 }
 
