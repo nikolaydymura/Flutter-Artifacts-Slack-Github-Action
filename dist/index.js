@@ -6187,9 +6187,9 @@ async function action(payload) {
     const androidVersion = core.getInput("android-version-name", { required: true });
     const androidReleaseUrl = core.getInput("android-release-url", { required: true });
     const androidInstallUrl = core.getInput("android-install-url", { required: true });
+    const commitMessage = core.getInput("head-commit-message", { required: true });
     const actor = github.context.actor;
     const refName= github.context.ref;
-    const commitMessage = payload.workflow_run.head_commit.message;
     const repo = github.context.repo;
     const buildUrl = `https://github.com/${repo.owner}/${repo.repo}/actions/runs/${github.context.runId}`
 

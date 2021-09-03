@@ -28,6 +28,9 @@ inputs:
   jira-host:
     description: 'Atlassian Jira host'
     required: true
+  head-commit-message:
+    description: 'Commit message'
+    required: true
 outputs:
   message-payload:
     description: "Slack message payload"
