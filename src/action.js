@@ -23,16 +23,16 @@ async function action(payload) {
         core.error(`Issue key not found in ${commitMessage}. Is ${keyRegex} correct?`);
         return;
     }
-    const issueUrl = `https://'${jiraHost}'/browse/'${issueKey}`
+    const issueUrl = `https://${jiraHost}/browse/${issueKey}`
 
     const messageBody = {
-        text: `${refName}' ('${buildNumber}') was successfully built!`,
+        text: `${refName} (${buildNumber}) was successfully built!`,
         blocks: [
             {
                 type: "header",
                 text: {
                     type: "plain_text",
-                    text: `${refName}' ('${buildNumber}') was successfully built!`
+                    text: `${refName} (${buildNumber}) was successfully built!`
                 }
             },
             {
@@ -93,7 +93,7 @@ async function action(payload) {
                             type: "plain_text",
                             text: `Install iOS ${iosVersion}`
                         },
-                        url: iosInstallUrl
+                        url: fixItunesLink(iosInstallUrl)
                     }
                 ]
             },
@@ -135,6 +135,11 @@ function getIssueKey(message, pattern) {
     const matches = regex.exec(message);
     return matches[1];
 }
+
+function fixItunesLink(url){
+    return url.replace('://?', '://0.0.0.0?')
+}
+
 module.exports = {
     action
 };
